@@ -44,7 +44,9 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
   </ImportGroup>
-  <ItemGroup Label="WrappedTaskItems" />
+  <ItemGroup Label="WrappedTaskItems">
+    <ClInclude Include="passThrough.h" />
+  </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>passThrough</TargetName>
   </PropertyGroup>
@@ -54,9 +56,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RemoveDriver>True</RemoveDriver>
-    <InstallMode>InstallAndVerify</InstallMode>
+    <InstallMode>CustomCommand</InstallMode>
     <HardwareIdString />
-    <CommandLine />
+    <CommandLine>RUNDLL32.EXE SETUPAPI.DLL,InstallHinfSection DefaultInstall 132 passThrough.inf</CommandLine>
     <ScriptPath>C:\Program Files (x86)\Windows Kits\10\Testing\Tests\Utilities\DefaultDriverPackageInstallationTask.dll</ScriptPath>
     <DeployFiles />
     <ScriptName>Microsoft.DriverKit.DefaultDriverPackageInstallationClass.PerformDefaultDriverPackageInstallation</ScriptName>
@@ -99,7 +101,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="passThrough.c" />
-    <ResourceCompile Include="passThrough.rc" />
   </ItemGroup>
   <ItemGroup>
     <Inf Include="passThrough.inf" />
