@@ -24,6 +24,7 @@ MiniFilter.DriverFiles  = 12            ;%windir%\system32\drivers
 ;;
 
 [DefaultInstall.NTamd64]
+%DriverName%        = passThrough, Root\passThrough
 OptionDesc          = %ServiceDescription%
 CopyFiles           = MiniFilter.DriverFiles1
 
