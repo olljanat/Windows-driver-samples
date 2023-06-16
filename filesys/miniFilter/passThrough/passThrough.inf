@@ -12,6 +12,7 @@ ClassGuid   = {b86dff51-a31e-4bac-b3cf-e8cfe75c9fc2}    ;This value is determine
 Provider    = %ProviderString%
 DriverVer   = 06/16/2007,1.0.0.1
 CatalogFile = passthrough.cat
+PnpLockdown = 1
 
 
 [DestinationDirs]
@@ -22,21 +23,22 @@ MiniFilter.DriverFiles  = 12            ;%windir%\system32\drivers
 ;; Default install sections
 ;;
 
-[DefaultInstall]
+[DefaultInstall.NTamd64]
 OptionDesc          = %ServiceDescription%
-CopyFiles           = MiniFilter.DriverFiles
+CopyFiles           = MiniFilter.DriverFiles1
 
-[DefaultInstall.Services]
+[DefaultInstall.NTamd64.Services]
 AddService          = %ServiceName%,,MiniFilter.Service
 
 ;;
 ;; Default uninstall sections
 ;;
 
-[DefaultUninstall]
-DelFiles   = MiniFilter.DriverFiles
+[DefaultUninstall.NTamd64]
+LegacyUninstall = 1
+DelFiles   = MiniFilter.DriverFiles2
 
-[DefaultUninstall.Services]
+[DefaultUninstall.NTamd64.Services]
 DelService = %ServiceName%,0x200      ;Ensure service is stopped before deleting
 
 ;
@@ -69,7 +71,9 @@ HKR,"Instances\"%Instance1.Name%,"Flags",0x00010001,%Instance1.Flags%
 ; Copy Files
 ;
 
-[MiniFilter.DriverFiles]
+[MiniFilter.DriverFiles1]
+%DriverName%.sys
+[MiniFilter.DriverFiles2]
 %DriverName%.sys
 
 [SourceDisksFiles]
